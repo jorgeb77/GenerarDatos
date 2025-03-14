@@ -331,7 +331,7 @@ end;
 
 procedure TFRPrincipal.InitializeDataTypes;
 begin
-  SetLength(DataTypes, 50);
+  SetLength(DataTypes, 51);
 
 // (dcPersonal, dcUbicacion, dcNegocios, dcFechas, dcHoras, dcNumeros, dcMedicamentos, dcPersonalizado, dcPagos, dcProductos);
 
@@ -397,256 +397,263 @@ begin
   DataTypes[9].Longitud  := 0;
   DataTypes[9].Icon      := 7;
 
-  // Ubicación
-  DataTypes[10].Nombre    := 'País';
-  DataTypes[10].Categoria := dcUbicacion;
+  DataTypes[10].Nombre    := 'Pasatiempos';
+  DataTypes[10].Categoria := dcPersonal;
   DataTypes[10].TipoCampo := ftString;
-  DataTypes[10].Longitud  := 50;
+  DataTypes[10].Longitud  := 30;
   DataTypes[10].Icon      := 8;
 
-  DataTypes[11].Nombre    := 'Ciudad';
+
+  // Ubicación
+  DataTypes[11].Nombre    := 'País';
   DataTypes[11].Categoria := dcUbicacion;
   DataTypes[11].TipoCampo := ftString;
   DataTypes[11].Longitud  := 50;
-  DataTypes[11].Icon      := 9;
+  DataTypes[11].Icon      := 8;
 
-  DataTypes[12].Nombre    := 'Dirección';
+  DataTypes[12].Nombre    := 'Ciudad';
   DataTypes[12].Categoria := dcUbicacion;
   DataTypes[12].TipoCampo := ftString;
-  DataTypes[12].Longitud  := 100;
-  DataTypes[12].Icon      := 10;
+  DataTypes[12].Longitud  := 50;
+  DataTypes[12].Icon      := 9;
 
-  // Negocios
-  DataTypes[13].Nombre    := 'Empresa';
-  DataTypes[13].Categoria := dcNegocios;
+  DataTypes[13].Nombre    := 'Dirección';
+  DataTypes[13].Categoria := dcUbicacion;
   DataTypes[13].TipoCampo := ftString;
   DataTypes[13].Longitud  := 100;
-  DataTypes[13].Icon      := 11;
+  DataTypes[13].Icon      := 10;
 
-  DataTypes[14].Nombre    := 'Cargo';
+  // Negocios
+  DataTypes[14].Nombre    := 'Empresa';
   DataTypes[14].Categoria := dcNegocios;
   DataTypes[14].TipoCampo := ftString;
-  DataTypes[14].Longitud  := 50;
-  DataTypes[14].Icon      := 12;
+  DataTypes[14].Longitud  := 100;
+  DataTypes[14].Icon      := 11;
 
-  DataTypes[15].Nombre    := 'Departamento';
+  DataTypes[15].Nombre    := 'Cargo';
   DataTypes[15].Categoria := dcNegocios;
   DataTypes[15].TipoCampo := ftString;
   DataTypes[15].Longitud  := 50;
-  DataTypes[15].Icon      := 13;
+  DataTypes[15].Icon      := 12;
+
+  DataTypes[16].Nombre    := 'Departamento';
+  DataTypes[16].Categoria := dcNegocios;
+  DataTypes[16].TipoCampo := ftString;
+  DataTypes[16].Longitud  := 50;
+  DataTypes[16].Icon      := 13;
 
   // Fechas [ fecha ]
-  DataTypes[16].Nombre    := 'Fecha';
-  DataTypes[16].Categoria := dcFechas;
-  DataTypes[16].TipoCampo := ftDate;
-  DataTypes[16].Longitud  := 0;
-  DataTypes[16].Icon      := 14;
+  DataTypes[17].Nombre    := 'Fecha';
+  DataTypes[17].Categoria := dcFechas;
+  DataTypes[17].TipoCampo := ftDate;
+  DataTypes[17].Longitud  := 0;
+  DataTypes[17].Icon      := 14;
 
   // Fechas  [ Fecha Y hora ]
-  DataTypes[17].Nombre    := 'Fecha y Hora';
-  DataTypes[17].Categoria := dcFechas;
-  DataTypes[17].TipoCampo := ftDateTime;
-  DataTypes[17].Longitud  := 0;
-  DataTypes[17].Icon      := 15;
+  DataTypes[18].Nombre    := 'Fecha y Hora';
+  DataTypes[18].Categoria := dcFechas;
+  DataTypes[18].TipoCampo := ftDateTime;
+  DataTypes[18].Longitud  := 0;
+  DataTypes[18].Icon      := 15;
 
   // Horas
-  DataTypes[18].Nombre    := 'Hora';
-  DataTypes[18].Categoria := dcHoras;
-  DataTypes[18].TipoCampo := ftTime;
-  DataTypes[18].Longitud  := 0;
-  DataTypes[18].Icon      := 16;
+  DataTypes[19].Nombre    := 'Hora';
+  DataTypes[19].Categoria := dcHoras;
+  DataTypes[19].TipoCampo := ftTime;
+  DataTypes[19].Longitud  := 0;
+  DataTypes[19].Icon      := 16;
 
   // Números
-  DataTypes[19].Nombre    := 'Entero';
-  DataTypes[19].Categoria := dcNumeros;
-  DataTypes[19].TipoCampo := ftInteger;
-  DataTypes[19].Longitud  := 0;
-  DataTypes[19].Icon      := 17;
-
-  DataTypes[20].Nombre    := 'Decimal';
+  DataTypes[20].Nombre    := 'Entero';
   DataTypes[20].Categoria := dcNumeros;
-  DataTypes[20].TipoCampo := ftFloat;
+  DataTypes[20].TipoCampo := ftInteger;
   DataTypes[20].Longitud  := 0;
-  DataTypes[20].Icon      := 18;
+  DataTypes[20].Icon      := 17;
+
+  DataTypes[21].Nombre    := 'Decimal';
+  DataTypes[21].Categoria := dcNumeros;
+  DataTypes[21].TipoCampo := ftFloat;
+  DataTypes[21].Longitud  := 0;
+  DataTypes[21].Icon      := 18;
 
   // Medicamentos
 
-  DataTypes[21].Nombre    := 'Medicamento';
-  DataTypes[21].Categoria := dcMedicamentos;
-  DataTypes[21].TipoCampo := ftString;
-  DataTypes[21].Longitud  := 100;
-  DataTypes[21].Icon      := 19;
+  DataTypes[22].Nombre    := 'Medicamento';
+  DataTypes[22].Categoria := dcMedicamentos;
+  DataTypes[22].TipoCampo := ftString;
+  DataTypes[22].Longitud  := 100;
+  DataTypes[22].Icon      := 19;
 
   // Personalizado
-  DataTypes[22].Nombre    := 'Texto Aleatorio';
-  DataTypes[22].Categoria := dcPersonalizado;
-  DataTypes[22].TipoCampo := ftString;
-  DataTypes[22].Longitud  := 50;
-  DataTypes[22].Icon      := 20;
-
-  DataTypes[23].Nombre    := 'Número Aleatorio';
+  DataTypes[23].Nombre    := 'Texto Aleatorio';
   DataTypes[23].Categoria := dcPersonalizado;
-  DataTypes[23].TipoCampo := ftInteger;
-  DataTypes[23].Longitud  := 0;
-  DataTypes[23].Icon      := 21;
+  DataTypes[23].TipoCampo := ftString;
+  DataTypes[23].Longitud  := 50;
+  DataTypes[23].Icon      := 20;
+
+  DataTypes[24].Nombre    := 'Número Aleatorio';
+  DataTypes[24].Categoria := dcPersonalizado;
+  DataTypes[24].TipoCampo := ftInteger;
+  DataTypes[24].Longitud  := 0;
+  DataTypes[24].Icon      := 21;
 
   // Pagos
-  DataTypes[24].Nombre    := 'Metodo de Pago';
-  DataTypes[24].Categoria := dcPagos;
-  DataTypes[24].TipoCampo := ftString;
-  DataTypes[24].Longitud  := 20;
-  DataTypes[24].Icon      := 22;
-
-  DataTypes[25].Nombre    := 'Número tarjeta crédito';
+  DataTypes[25].Nombre    := 'Metodo de Pago';
   DataTypes[25].Categoria := dcPagos;
   DataTypes[25].TipoCampo := ftString;
   DataTypes[25].Longitud  := 20;
-  DataTypes[25].Icon      := 23;
+  DataTypes[25].Icon      := 22;
 
-  DataTypes[26].Nombre    := 'Tipo tarjeta crédito';
+  DataTypes[26].Nombre    := 'Número tarjeta crédito';
   DataTypes[26].Categoria := dcPagos;
   DataTypes[26].TipoCampo := ftString;
   DataTypes[26].Longitud  := 20;
-  DataTypes[26].Icon      := 24;
+  DataTypes[26].Icon      := 23;
 
-  DataTypes[27].Nombre    := 'Tipo moneda';
+  DataTypes[27].Nombre    := 'Tipo tarjeta crédito';
   DataTypes[27].Categoria := dcPagos;
   DataTypes[27].TipoCampo := ftString;
-  DataTypes[27].Longitud  := 100;
-  DataTypes[27].Icon      := 25;
+  DataTypes[27].Longitud  := 20;
+  DataTypes[27].Icon      := 24;
 
-  // Productos
-  DataTypes[28].Nombre    := 'Nombre producto';
-  DataTypes[28].Categoria := dcProductos;
+  DataTypes[28].Nombre    := 'Tipo moneda';
+  DataTypes[28].Categoria := dcPagos;
   DataTypes[28].TipoCampo := ftString;
   DataTypes[28].Longitud  := 100;
-  DataTypes[28].Icon      := 26;
+  DataTypes[28].Icon      := 25;
 
-  DataTypes[29].Nombre    := 'Categoria producto';
+  // Productos
+  DataTypes[29].Nombre    := 'Nombre producto';
   DataTypes[29].Categoria := dcProductos;
   DataTypes[29].TipoCampo := ftString;
   DataTypes[29].Longitud  := 100;
-  DataTypes[29].Icon      := 27;
+  DataTypes[29].Icon      := 26;
 
-  DataTypes[30].Nombre    := 'Unidades de longitud';
+  DataTypes[30].Nombre    := 'Categoria producto';
   DataTypes[30].Categoria := dcProductos;
   DataTypes[30].TipoCampo := ftString;
-  DataTypes[30].Longitud  := 5;
-  DataTypes[30].Icon      := 28;
+  DataTypes[30].Longitud  := 100;
+  DataTypes[30].Icon      := 27;
 
-  DataTypes[31].Nombre    := 'Unidades de peso';
+  DataTypes[31].Nombre    := 'Unidades de longitud';
   DataTypes[31].Categoria := dcProductos;
   DataTypes[31].TipoCampo := ftString;
   DataTypes[31].Longitud  := 5;
-  DataTypes[31].Icon      := 29;
+  DataTypes[31].Icon      := 28;
 
-  DataTypes[32].Nombre    := 'Unidades de volumen';
+  DataTypes[32].Nombre    := 'Unidades de peso';
   DataTypes[32].Categoria := dcProductos;
   DataTypes[32].TipoCampo := ftString;
   DataTypes[32].Longitud  := 5;
-  DataTypes[32].Icon      := 30;
+  DataTypes[32].Icon      := 29;
 
-  DataTypes[33].Nombre    := 'Colores';
+  DataTypes[33].Nombre    := 'Unidades de volumen';
   DataTypes[33].Categoria := dcProductos;
   DataTypes[33].TipoCampo := ftString;
-  DataTypes[33].Longitud  := 20;
-  DataTypes[33].Icon      := 31;
+  DataTypes[33].Longitud  := 5;
+  DataTypes[33].Icon      := 30;
 
-  DataTypes[34].Nombre    := 'Talla de ropa';
+  DataTypes[34].Nombre    := 'Colores';
   DataTypes[34].Categoria := dcProductos;
   DataTypes[34].TipoCampo := ftString;
-  DataTypes[34].Longitud  := 5;
-  DataTypes[34].Icon      := 32;
+  DataTypes[34].Longitud  := 20;
+  DataTypes[34].Icon      := 31;
 
-  DataTypes[35].Nombre    := 'Número ISBN';
+  DataTypes[35].Nombre    := 'Talla de ropa';
   DataTypes[35].Categoria := dcProductos;
   DataTypes[35].TipoCampo := ftString;
-  DataTypes[35].Longitud  := 15;
-  DataTypes[35].Icon      := 33;
+  DataTypes[35].Longitud  := 5;
+  DataTypes[35].Icon      := 32;
 
-  DataTypes[36].Nombre    := 'Barcode';
+  DataTypes[36].Nombre    := 'Número ISBN';
   DataTypes[36].Categoria := dcProductos;
   DataTypes[36].TipoCampo := ftString;
   DataTypes[36].Longitud  := 15;
-  DataTypes[36].Icon      := 34;
+  DataTypes[36].Icon      := 33;
 
-  DataTypes[37].Nombre    := 'Número tracking';
+  DataTypes[37].Nombre    := 'Barcode';
   DataTypes[37].Categoria := dcProductos;
   DataTypes[37].TipoCampo := ftString;
   DataTypes[37].Longitud  := 15;
-  DataTypes[37].Icon      := 35;
+  DataTypes[37].Icon      := 34;
 
-  DataTypes[38].Nombre    := 'Método envio';
+  DataTypes[38].Nombre    := 'Número tracking';
   DataTypes[38].Categoria := dcProductos;
   DataTypes[38].TipoCampo := ftString;
   DataTypes[38].Longitud  := 15;
-  DataTypes[38].Icon      := 36;
+  DataTypes[38].Icon      := 35;
 
-  DataTypes[39].Nombre    := 'Tipos de empaques';
+  DataTypes[39].Nombre    := 'Método envio';
   DataTypes[39].Categoria := dcProductos;
   DataTypes[39].TipoCampo := ftString;
   DataTypes[39].Longitud  := 15;
-  DataTypes[39].Icon      := 37;
+  DataTypes[39].Icon      := 36;
 
-  DataTypes[40].Nombre    := 'Frutas';
+  DataTypes[40].Nombre    := 'Tipos de empaques';
   DataTypes[40].Categoria := dcProductos;
   DataTypes[40].TipoCampo := ftString;
-  DataTypes[40].Longitud  := 20;
-  DataTypes[40].Icon      := 38;
+  DataTypes[40].Longitud  := 15;
+  DataTypes[40].Icon      := 37;
 
-  DataTypes[41].Nombre    := 'Bebidas';
+  DataTypes[41].Nombre    := 'Frutas';
   DataTypes[41].Categoria := dcProductos;
   DataTypes[41].TipoCampo := ftString;
-  DataTypes[41].Longitud  := 30;
-  DataTypes[41].Icon      := 39;
+  DataTypes[41].Longitud  := 20;
+  DataTypes[41].Icon      := 38;
 
-  DataTypes[42].Nombre    := 'Platos';
+  DataTypes[42].Nombre    := 'Bebidas';
   DataTypes[42].Categoria := dcProductos;
   DataTypes[42].TipoCampo := ftString;
-  DataTypes[42].Longitud  := 50;
-  DataTypes[42].Icon      := 40;
+  DataTypes[42].Longitud  := 30;
+  DataTypes[42].Icon      := 39;
 
-  DataTypes[43].Nombre    := 'Super Mercado';
+  DataTypes[43].Nombre    := 'Platos';
   DataTypes[43].Categoria := dcProductos;
   DataTypes[43].TipoCampo := ftString;
-  DataTypes[43].Longitud  := 100;
-  DataTypes[43].Icon      := 41;
+  DataTypes[43].Longitud  := 50;
+  DataTypes[43].Icon      := 40;
 
-  DataTypes[44].Nombre    := 'Ferreteria';
+  DataTypes[44].Nombre    := 'Super Mercado';
   DataTypes[44].Categoria := dcProductos;
   DataTypes[44].TipoCampo := ftString;
-  DataTypes[44].Longitud  := 150;
-  DataTypes[44].Icon      := 42;
+  DataTypes[44].Longitud  := 100;
+  DataTypes[44].Icon      := 41;
 
-  DataTypes[45].Nombre    := 'Tienda';
+  DataTypes[45].Nombre    := 'Ferreteria';
   DataTypes[45].Categoria := dcProductos;
   DataTypes[45].TipoCampo := ftString;
   DataTypes[45].Longitud  := 150;
-  DataTypes[45].Icon      := 43;
+  DataTypes[45].Icon      := 42;
 
-  DataTypes[46].Nombre    := 'Deporte';
+  DataTypes[46].Nombre    := 'Tienda';
   DataTypes[46].Categoria := dcProductos;
   DataTypes[46].TipoCampo := ftString;
   DataTypes[46].Longitud  := 150;
-  DataTypes[46].Icon      := 44;
+  DataTypes[46].Icon      := 43;
 
-  DataTypes[47].Nombre    := 'Muebles';
+  DataTypes[47].Nombre    := 'Deporte';
   DataTypes[47].Categoria := dcProductos;
   DataTypes[47].TipoCampo := ftString;
   DataTypes[47].Longitud  := 150;
-  DataTypes[47].Icon      := 45;
+  DataTypes[47].Icon      := 44;
 
-  DataTypes[48].Nombre    := 'Jueguetes';
+  DataTypes[48].Nombre    := 'Muebles';
   DataTypes[48].Categoria := dcProductos;
   DataTypes[48].TipoCampo := ftString;
   DataTypes[48].Longitud  := 150;
-  DataTypes[48].Icon      := 46;
+  DataTypes[48].Icon      := 45;
 
-  DataTypes[49].Nombre    := 'Salon de belleza';
+  DataTypes[49].Nombre    := 'Jueguetes';
   DataTypes[49].Categoria := dcProductos;
   DataTypes[49].TipoCampo := ftString;
   DataTypes[49].Longitud  := 150;
-  DataTypes[49].Icon      := 47;
+  DataTypes[49].Icon      := 46;
+
+  DataTypes[50].Nombre    := 'Salon de belleza';
+  DataTypes[50].Categoria := dcProductos;
+  DataTypes[50].TipoCampo := ftString;
+  DataTypes[50].Longitud  := 150;
+  DataTypes[50].Icon      := 47;
 
 
 
@@ -734,10 +741,10 @@ procedure TFRPrincipal.MostrarVistaPrevia;
 
 const
   Generos : array[1..2] of string = ('Masculino','Femenino');
-  Campos : array[1..43] of string = ('Nombre', 'Apellido', 'Nombre y Apellido',
+  Campos : array[1..44] of string = ('Nombre', 'Apellido', 'Nombre y Apellido',
                                      'Genero', 'Email', 'Teléfono', 'Tipo Teléfono',
-                                     'Estado Civil', 'Empresa', 'Cargo',
-                                     'Departamento', 'País', 'Ciudad',
+                                     'Estado Civil', 'Pasatiempos', 'Empresa',
+                                     'Cargo', 'Departamento', 'País', 'Ciudad',
                                      'Dirección', 'Medicamento',
                                      'Texto Aleatorio','Fecha', 'Metodo de Pago',
                                      'Número tarjeta crédito', 'Tipo tarjeta crédito',
@@ -834,6 +841,11 @@ begin
       if cmbTipoDato.Text = 'Edad' then
         begin
           Muestra := Muestra + IntToStr(Persona.Edad) + ', ';
+        end
+    else
+      if cmbTipoDato.Text = 'Pasatiempos' then
+        begin
+          Muestra := Muestra + TDataGenerator.GenerateRandomHobbies(Locale) + ', ';
         end
     else
       if cmbTipoDato.Text = 'Teléfono' then
@@ -1395,10 +1407,10 @@ end;
 
 procedure TFRPrincipal.btnAgregarCampoClick(Sender: TObject);
 const
-  Campos : array[1..40] of string = ('Nombre', 'Apellido', 'Nombre y Apellido',
+  Campos : array[1..41] of string = ('Nombre', 'Apellido', 'Nombre y Apellido',
                                      'Email', 'Teléfono', 'Tipo Teléfono',
-                                     'Estado Civil', 'Empresa', 'Cargo',
-                                     'Departamento', 'País', 'Ciudad',
+                                     'Estado Civil', 'Pasatiempos', 'Empresa',
+                                     'Cargo', 'Departamento', 'País', 'Ciudad',
                                      'Dirección', 'Medicamento',
                                      'Texto Aleatorio','Número tarjeta crédito',
                                      'Tipo tarjeta crédito', 'Tipo moneda',
@@ -1411,8 +1423,6 @@ const
                                      'Platos', 'Super Mercado', 'Ferreteria',
                                      'Tienda', 'Deporte', 'Muebles', 'Jueguetes',
                                      'Salon de belleza');
-
-
 
 var
   FieldExists : Boolean;
@@ -1711,7 +1721,8 @@ begin
                   Field.AsString := TDataGenerator.GenerateRandomPhoneNumber(Locale)
                 else if Pos('Estado Civil', Field.DisplayLabel) > 0 then
                   Field.AsString := TDataGenerator.GenerateRandomMaritalStatus(Locale)
-
+                else if Pos('Pasatiempos', Field.DisplayLabel) > 0 then
+                  Field.AsString := TDataGenerator.GenerateRandomHobbies(Locale)
                 else if Pos('Empresa', Field.DisplayLabel) > 0 then
                   Field.AsString := TDataGenerator.GenerateRandomCompany(Locale)
                 else if Pos('Cargo', Field.DisplayLabel) > 0 then
