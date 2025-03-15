@@ -740,7 +740,9 @@ procedure TFRPrincipal.MostrarVistaPrevia;
   end;
 
 const
-  Generos : array[1..2] of string = ('Masculino','Femenino');
+  Generos_ES : array[1..2] of string = ('Masculino','Femenino');
+  Generos_US : array[1..2] of string = ('Male','Female');
+
   Campos : array[1..44] of string = ('Nombre', 'Apellido', 'Nombre y Apellido',
                                      'Genero', 'Email', 'Teléfono', 'Tipo Teléfono',
                                      'Estado Civil', 'Pasatiempos', 'Empresa',
@@ -835,12 +837,12 @@ begin
     else
       if cmbTipoDato.Text = 'Fecha nacimiento' then
         begin
-          Muestra := Muestra + DateToStr(Persona.FechaNacimiento) + ', ';
+          Muestra := Muestra + DateToStr(Persona.Birthdate) + ', ';
         end
     else
       if cmbTipoDato.Text = 'Edad' then
         begin
-          Muestra := Muestra + IntToStr(Persona.Edad) + ', ';
+          Muestra := Muestra + IntToStr(Persona.Age) + ', ';
         end
     else
       if cmbTipoDato.Text = 'Pasatiempos' then
@@ -1068,7 +1070,13 @@ begin
         end;
 
       for J:= 1 to 2 do
-        Muestra := Muestra + Generos[J] + ', ';
+        begin
+          case Locale of
+            dlLatino : Muestra := Muestra + Generos_ES[J] + ', ';
+            dlUS     : Muestra := Muestra + Generos_US[J] + ', ';
+          end;
+
+        end;
     end;
 
   if cmbTipoDato.Text = 'Unidades de longitud' then
@@ -1615,6 +1623,11 @@ begin
 end;
 
 procedure TFRPrincipal.btnCrearArchivoClick(Sender: TObject);
+const
+  MaritalStatus_M : array[1..4] of string = ('Casado', 'Soltero', 'Divorciado','Viudo');
+  MaritalStatus_F : array[1..4] of string = ('Casada', 'Soltera', 'Divorciada','Viuda');
+  MaritalStatus_US : array[1..4] of string = ('Married', 'Single', 'Divorced', 'Widow');
+
 var
   I, J, Cantidad : Integer;
   Field          : TField;
@@ -1712,7 +1725,7 @@ begin
                 else if Pos('Apellido', Field.DisplayLabel) > 0 then
                   Field.AsString := Persona.LastName
                 else if Pos('Genero', Field.DisplayLabel) > 0 then
-                  Field.AsString := Persona.Sexo
+                  Field.AsString := Persona.Sex
                 else if Pos('Email', Field.DisplayLabel) > 0 then
                   Field.AsString := Persona.Email
                 else if Pos('Tipo Teléfono', Field.DisplayLabel) > 0 then
@@ -1720,7 +1733,21 @@ begin
                 else if Pos('Teléfono', Field.DisplayLabel) > 0 then
                   Field.AsString := TDataGenerator.GenerateRandomPhoneNumber(Locale)
                 else if Pos('Estado Civil', Field.DisplayLabel) > 0 then
-                  Field.AsString := TDataGenerator.GenerateRandomMaritalStatus(Locale)
+                       begin
+                         case Locale of
+                           dlLatino    : begin
+                                           if Persona.Sex = 'Masculino' then
+                                             Field.AsString := TDataGenerator.GetRandomElement(MaritalStatus_M)
+                                           else
+                                             Field.AsString := TDataGenerator.GetRandomElement(MaritalStatus_F);
+                                         end;
+
+                           dlUS        : begin
+                                           Field.AsString := TDataGenerator.GetRandomElement(MaritalStatus_US);
+                                         end;
+                         end;
+                       end
+
                 else if Pos('Pasatiempos', Field.DisplayLabel) > 0 then
                   Field.AsString := TDataGenerator.GenerateRandomHobbies(Locale)
                 else if Pos('Empresa', Field.DisplayLabel) > 0 then
@@ -1886,7 +1913,7 @@ begin
               begin
                 if Pos('Edad', Field.DisplayLabel) > 0 then
                   begin
-                    Field.AsInteger := Persona.Edad;
+                    Field.AsInteger := Persona.Age;
                     Continue;
                   end;
 
@@ -1991,7 +2018,7 @@ begin
 
                 if Pos('Fecha nacimiento', Field.DisplayLabel) > 0 then
                   begin
-                    Field.AsDateTime := Persona.FechaNacimiento;
+                    Field.AsDateTime := Persona.Birthdate;
                     Continue;
                   end;
 
