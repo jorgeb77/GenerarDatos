@@ -538,7 +538,7 @@ object FRPrincipal: TFRPrincipal
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -18
-        Font.Name = 'Tahoma'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -560,7 +560,7 @@ object FRPrincipal: TFRPrincipal
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -18
-        Font.Name = 'Tahoma'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -960,7 +960,7 @@ object FRPrincipal: TFRPrincipal
     end
     object cxLabel1: TcxLabel
       Left = 27
-      Top = 54
+      Top = 50
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -969,8 +969,8 @@ object FRPrincipal: TFRPrincipal
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
-      Style.Font.Height = -19
-      Style.Font.Name = 'Tahoma'
+      Style.Font.Height = -20
+      Style.Font.Name = 'Segoe UI'
       Style.Font.Style = []
       Style.LookAndFeel.NativeStyle = False
       Style.IsFontAssigned = True

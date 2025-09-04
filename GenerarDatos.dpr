@@ -3,7 +3,8 @@ program GenerarDatos;
 uses
   Vcl.Forms,
   DataGenerator in '..\Utileria Delphi\DataGenerator.pas',
-  UFRPrincipal in 'UFRPrincipal.pas' {FRPrincipal};
+  UFRPrincipal in 'UFRPrincipal.pas' {FRPrincipal},
+  UResolucionPantalla in '..\Utileria Delphi\UResolucionPantalla.pas';
 
 {$R *.res}
 

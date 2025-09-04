@@ -67,13 +67,6 @@ type
     DateFin   : TDate;
   end;
 
-type
-  TScreenResolution = (stLowRes,     // < 1366x768
-                       stHD,         // 1366x768
-                       stFullHD,     // 1920x1080
-                       stQHD,        // 2560x1440
-                       st4K);        // 3840x2160
-
   TFRPrincipal = class(TForm)
     pnlFieldConfig: TPanel;
     pnlPreview: TcxGroupBox;
@@ -171,7 +164,6 @@ type
     function GetNumericConfig(const FieldName : string) : TNumericConfig;
     function GetDateConfig(const FieldName : string) : TDateConfig;
     procedure AddGridColumn(AView : TcxGridDBTableView; AFieldName, ACaption : string; Size : Integer);
-    function GetScreenResolution : TScreenResolution;
   public
     procedure SaveAsCSV(myFileName : string; DataSet : TDataSet);
     procedure SaveAsJSON(const FileName : string; DataSet : TDataSet);
@@ -192,7 +184,7 @@ implementation
 {$R *.dfm}
 
 uses
-  cxGridStrs, dxCore,
+  UResolucionPantalla, cxGridStrs, dxCore,
   cxGridExportLink; //Necesario para la exportacion de los datos del cxGrid
 
 
@@ -287,20 +279,7 @@ begin
 end;
 
 procedure TFRPrincipal.FormCreate(Sender: TObject);
-begin //Manejamos el tamaño del formulario de acuerdo a la resolución de pantalla
-  if GetScreenResolution = st4K then
-    begin
-      FRPrincipal.Constraints.MinHeight := 1215;
-      FRPrincipal.Constraints.MaxHeight := 1215;
-      FRPrincipal.Height                := 1215;
-    end
-  else if GetScreenResolution = stQHD then
-    begin
-      FRPrincipal.Constraints.MinHeight := 1429;
-      FRPrincipal.Constraints.MaxHeight := 1429;
-      FRPrincipal.Height                := 1429;
-    end;
-
+begin
   // Eliminamos <No data to display> en el cxGrid (uses cxClasses, cxGridStrs, dxCore)
   cxSetResourceString(@scxGridNoDataInfoText, '');
 end;
@@ -327,6 +306,23 @@ begin
 
   // Crear una nueva lista para almacenar las longitudes del texto personalizado
   LongitudTexto := TList<TLongitudTexto>.Create;
+
+//Manejamos el tamaño del formulario de acuerdo a la resolución de pantalla
+  if GetScreenResolution = st4K then
+    begin
+      Self.Constraints.MinHeight := 1217;
+      Self.Constraints.MaxHeight := 1217;
+      Self.Height                := 1217;
+      Self.Width                 := 1375;
+    end
+  else if GetScreenResolution = stQHD then
+    begin
+      Self.Constraints.MinHeight := 1429;
+      Self.Constraints.MaxHeight := 1429;
+      Self.Height                := 1429;
+//      Self.Width                 := 1375;
+    end;
+
 end;
 
 procedure TFRPrincipal.InitializeDataTypes;
@@ -1131,10 +1127,6 @@ begin
       end;
     end;
 
-
-
-
-
   if cmbTipoDato.Text = 'Tipo tarjeta crédito' then
     begin
       CardTypes := ['Mastercard','VISA','American Express','Diners Club', 'Discover'];
@@ -1199,8 +1191,6 @@ begin
             Muestra := Muestra + sValor + ', ';
         end;
     end;
-
-
 
   if AnsiMatchStr(cmbTipoDato.Text, Campos) then  //Si lo que seleccione esta en el array
     begin
@@ -1438,8 +1428,9 @@ var
 begin
 //  if FDMemTable1.RecordCount > 0 then
 //    begin
-//      MessageDlg('Antes de agregar un campo, debe limpiar la tabla primero.' +#13+
-//                 'Por favor verifique.', mtWarning, [mbOK], 0);
+//      MessageBox(Handle, PChar('Antes de agregar un campo, debe limpiar la tabla primero.' +#13+
+//                 'Por favor verifique.'),
+//                 'Operación invalida',MB_ICONWARNING or MB_OK);
 //      BtnLimpiar.SetFocus;
 //      Exit;
 //    end;
@@ -1448,15 +1439,16 @@ begin
     begin
       if StrToInt(EdMin.Text) > StrToInt(EdMax.Text) then
         begin
-          MessageDlg('El valor minimo no puede ser mayor al maximo',
-                     mtWarning, [mbOK], 0);
+          MessageBox(Handle,'El valor minimo no puede ser mayor al maximo',
+                     'Operación invalida',MB_ICONWARNING or MB_OK);
           Exit;
         end;
     end;
 
   if edtNombreCampo.Text = '' then
     begin
-      MessageDlg('Debe especificar un nombre para el campo', mtWarning, [mbOK], 0);
+      MessageBox(Handle,'Debe especificar un nombre para el campo',
+                 'Operación invalida',MB_ICONWARNING or MB_OK);
       edtNombreCampo.SetFocus;
       Exit;
     end;
@@ -1465,8 +1457,8 @@ begin
     begin
       if EdLongitud.Text = EmptyStr then
         begin
-          MessageDlg('Debe digitar la longitud del campo.',
-                     TMsgDlgType.mtWarning, [mbOK], 0);
+          MessageBox(Handle,'Debe digitar la longitud del campo.',
+                     'Operación invalida',MB_ICONWARNING or MB_OK);
           EdLongitud.SetFocus;
           Exit;
         end;
@@ -1486,8 +1478,8 @@ begin
 
   if FieldExists then
     begin
-      MessageDlg('El campo ' + Trim(edtNombreCampo.Text) + ' ya existe.',
-                 mtWarning, [mbOK], 0);
+      MessageBox(Handle, PChar('El campo ' + Trim(edtNombreCampo.Text) + ' ya existe.'),
+                 'Operación invalida',MB_ICONWARNING or MB_OK);
       Exit;
     end;
 
@@ -1648,23 +1640,23 @@ begin
   // Validación básica
   if edtCantidadReg.Text = EmptyStr then
     begin
-      MessageDlg('Debe especificar la cantidad de registros a generar.',
-                 TMsgDlgType.mtWarning, [mbOK], 0);
+      MessageBox(Handle,'Debe especificar la cantidad de registros a generar.',
+                 'Operación invalida',MB_ICONWARNING or MB_OK);
       edtCantidadReg.SetFocus;
       Exit;
     end;
 
   if not FDMemTable1.Active then
     begin
-      MessageDlg('Debe agregar al menos un campo.',
-                 TMsgDlgType.mtWarning, [mbOK], 0);
+      MessageBox(Handle,'Debe agregar al menos un campo.',
+                 'Operación invalida',MB_ICONWARNING or MB_OK);
       Exit;
     end;
 
   if (RgFormatoExp.ItemIndex = 4) and (Trim(EdDelimitador.Text) = EmptyStr) then
     begin
-      MessageDlg('Debe especificar el delimitador del archivo.',
-                 TMsgDlgType.mtWarning, [mbOK], 0);
+      MessageBox(Handle,'Debe especificar el delimitador del archivo.',
+                 'Operación invalida',MB_ICONWARNING or MB_OK);
       EdDelimitador.SetFocus;
       Exit;
     end;
@@ -2089,8 +2081,8 @@ begin
               except
                 on E : Exception do
                 begin
-                  MessageDlg('Error al guardar JSON : ' + E.Message,
-                             TMsgDlgType.mtError, [mbOK], 0);
+                  MessageBox(Handle, PChar('Error al guardar JSON : ' + E.Message),
+                             'Operación invalida',MB_ICONERROR or MB_OK);
                 end;
               end;
             end;
@@ -2163,9 +2155,10 @@ begin
     Screen.Cursor := crDefault;
   end;
 
-  MessageDlg(Format('Archivo ' + RgFormatoExp.Properties.Items.Items[RgFormatoExp.ItemIndex].Caption +
-                    ' generado exitosamente con %d registros.'#13#10'Ubicación: %s',
-                    [Cantidad, FilePath]), TMsgDlgType.mtInformation, [mbOK], 0);
+  MessageBox(Handle, PChar(Format('Archivo ' + RgFormatoExp.Properties.Items.Items[RgFormatoExp.ItemIndex].Caption +
+             ' generado exitosamente con %d registros.'#13#10'Ubicación: %s',
+             [Cantidad, FilePath])),
+             'Operación completada',MB_ICONINFORMATION or MB_OK);
 end;
 
 procedure TFRPrincipal.BtnLimpiarClick(Sender: TObject);
@@ -2226,13 +2219,13 @@ end;
 
 procedure TFRPrincipal.SaveAsCSV(myFileName : string; DataSet : TDataSet);
 var
-  myTextFile : TextFile;
   I : Integer;
-  S : string;
+  TextFile, S : string;
+  Lineas : TStringList;
 begin
   //create a new file
-  AssignFile(myTextFile, myFileName);
-  Rewrite(myTextFile);
+  TextFile := myFileName;
+  Lineas   := TStringList.Create;
 
   S := ''; //initialize empty string
 
@@ -2243,7 +2236,7 @@ begin
         S := S + Format('%s;', [DataSet.Fields[I].FieldName]);
       end;
 
-    Writeln(myTextFile, S);
+    Lineas.Add(S);
 
     //write field values
     DataSet.First;
@@ -2255,13 +2248,17 @@ begin
             S := S + Format('%s;', [DataSet.Fields[I].AsString]);
           end;
 
-        Writeln(myTextfile, S);
+        Lineas.Add(S);
         DataSet.Next;
       end;
 
+    // Guardar archivo
+    TFile.WriteAllText(TextFile, Lineas.Text, TEncoding.UTF8);
+
   finally
-    CloseFile(myTextFile);
+    Lineas.Free;
   end;
+
 end;
 
 procedure TFRPrincipal.SaveAsJSON(const FileName : string; DataSet : TDataSet);
@@ -2432,33 +2429,36 @@ end;
 
 procedure TFRPrincipal.SaveAsYAML(const FileName : string; DataSet : TDataSet);
 var
-  YAMLFile : TextFile;
+  TextFile : string;
+  Lineas : TStringList;
   I : Integer;
   Field : TField;
   FieldValue : string;
 begin
-  AssignFile(YAMLFile, FileName);
-  Rewrite(YAMLFile);
+  TextFile := FileName;
+  Lineas   := TStringList.Create;
+
   try
     // Write header
-    Writeln(YAMLFile, '---');
-    Writeln(YAMLFile, 'dataset:');
+    Lineas.Add('---');
+    Lineas.Add('dataset:');
 
     // Write schema
-    Writeln(YAMLFile, '  schema:');
+    Lineas.Add('  schema:');
+
     for I := 0 to DataSet.FieldCount - 1 do
     begin
-      Writeln(YAMLFile, Format('    - name: %s', [DataSet.Fields[I].FieldName]));
-      Writeln(YAMLFile, Format('      type: %s', [GetEnumName(TypeInfo(TFieldType),
+      Lineas.Add(Format('    - name: %s', [DataSet.Fields[I].FieldName]));
+      Lineas.Add(Format('      type: %s', [GetEnumName(TypeInfo(TFieldType),
         Ord(DataSet.Fields[I].DataType))]));
     end;
 
     // Write records
-    Writeln(YAMLFile, '  records:');
+    Lineas.Add('  records:');
     DataSet.First;
     while not DataSet.Eof do
     begin
-      Writeln(YAMLFile, '    - record:');
+      Lineas.Add('    - record:');
 
       for Field in DataSet.Fields do
       begin
@@ -2494,14 +2494,19 @@ begin
               FieldValue := Field.AsString;
           end;
 
-        Writeln(YAMLFile, Format('        %s: %s', [Field.FieldName, FieldValue]));
+        Lineas.Add(Format('        %s: %s', [Field.FieldName, FieldValue]));
       end;
 
       DataSet.Next;
     end;
+
+    // Guardar archivo
+    TFile.WriteAllText(TextFile, Lineas.Text, TEncoding.UTF8);
+
   finally
-    CloseFile(YAMLFile);
+    Lineas.Free;
   end;
+
 end;
 
 procedure TFRPrincipal.SaveDataSetToTXT(DataSet : TDataSet; const NombreArchivo : string; Delimitador : Char = ';');
@@ -2605,23 +2610,5 @@ begin
   AView.ApplyBestFit;  // Si no ves la columna, refrescamos el grid
 end;
 
-// Determina el tipo de pantalla según la resolución
-function TFRPrincipal.GetScreenResolution : TScreenResolution;
-var
-  ScreenWidth : Integer;
-begin
-  ScreenWidth := Screen.Width;
-
-  if ScreenWidth < 1366 then
-    Result := stLowRes
-  else if ScreenWidth = 1366 then
-    Result := stHD
-  else if ScreenWidth <= 1920 then
-    Result := stFullHD
-  else if ScreenWidth <= 2560 then
-    Result := stQHD
-  else
-    Result := st4K;
-end;
 
 end.
